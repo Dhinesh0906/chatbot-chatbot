@@ -6,7 +6,7 @@ app = FastAPI()
 
 # Load model from the model folder inside render instance
 llm = Llama(
-    model_path="model/tinyllama.gguf",
+    model_path="../model/tinyllama.gguf",
     n_ctx=2048,
     n_threads=4,
     temperature=0.2,
@@ -26,3 +26,4 @@ def chat(req: ChatRequest):
     )
     text = output["choices"][0]["text"].strip()
     return {"response": text}
+
