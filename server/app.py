@@ -5,7 +5,8 @@ import os
 
 app = FastAPI()
 
-MODEL_PATH = "model/tinyllama.gguf"
+model_path="model/tinyllama.gguf"
+
 
 # Load the model
 llm = Llama(
@@ -26,3 +27,4 @@ def chat(req: ChatRequest):
     output = llm(req.prompt, max_tokens=200)
     text = output["choices"][0]["text"].strip()
     return { "response": text }
+
