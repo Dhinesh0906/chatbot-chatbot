@@ -1,5 +1,6 @@
 [build]
 command = """
+cd /app
 pip install -r server/requirements.txt
 bash download_model.sh
 """
