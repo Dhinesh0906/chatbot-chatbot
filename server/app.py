@@ -1,12 +1,15 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from llama_cpp import Llama
+import os
 
 app = FastAPI()
 
-# Load model from the model folder inside render instance
+MODEL_PATH = "model/tinyllama.gguf"
+
+# Load the model
 llm = Llama(
-    model_path="../model/tinyllama.gguf",
+    model_path=MODEL_PATH,
     n_ctx=2048,
     n_threads=4,
     temperature=0.2,
@@ -20,10 +23,6 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 def chat(req: ChatRequest):
-    output = llm(
-        req.prompt,
-        max_tokens=300
-    )
+    output = llm(req.prompt, max_tokens=200)
     text = output["choices"][0]["text"].strip()
-    return {"response": text}
-
+    return { "response": text }
