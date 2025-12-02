@@ -1,3 +1,2 @@
-fastapi
-uvicorn
+flask
 llama-cpp-python
