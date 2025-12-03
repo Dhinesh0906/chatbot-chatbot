@@ -1,10 +1,8 @@
-FROM python:3.10-slim
+FROM ollama/ollama:latest
 
-WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN ollama pull phi
 
-COPY app.py .
+EXPOSE 11434
 
-CMD ["python", "app.py"]
+CMD ["ollama", "serve"]
