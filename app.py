@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_URL = "http://ollama:11434/api/generate"
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -16,8 +16,8 @@ def chat():
         "stream": False
     }
 
-    res = requests.post(OLLAMA_URL, json=payload).json()
-    return jsonify({"response": res.get("response", "")})
+    r = requests.post(OLLAMA_URL, json=payload).json()
+    return jsonify({"response": r.get("response", "")})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
